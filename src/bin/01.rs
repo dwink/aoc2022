@@ -25,14 +25,10 @@ pub fn part_one(input: &str) -> Option<u32> {
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    let mut elves = parse_input(input)
-        .iter()
-        .map(|e| e.calories())
-        .collect::<Vec<u32>>();
+    let mut elves = parse_input(input);
+    elves.sort_by_cached_key(|e| e.calories());
 
-    elves.sort();
-
-    Some(elves.iter().rev().take(3).sum())
+    Some(elves.iter().rev().take(3).map(|e| e.calories()).sum())
 
 }
 
